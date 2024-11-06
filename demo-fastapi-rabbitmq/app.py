@@ -6,6 +6,12 @@ from models import CreateUserCommand, DeleteUserCommand
 
 app = FastAPI(title="Demo - FastAPI with RabbitMQ")
 
+@app.get("/user/{user_id}")
+async def get_user(user_id: int):
+    return {
+        "user_id": user_id
+    }
+
 @app.post("/user")
 async def create_user(command: CreateUserCommand):
     send_command(command)
